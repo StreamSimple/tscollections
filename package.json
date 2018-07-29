@@ -1,0 +1,31 @@
+{
+  "name": "com.streamsimple.tscollections",
+  "version": "1.0.0",
+  "description": "A collections library for typescript with support for equals and hashcode.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StreamSimple/tscollections.git"
+  },
+  "keywords": [
+    "collections",
+    "datastructures"
+  ],
+  "author": "StreamSimple, Inc.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/StreamSimple/tscollections/issues"
+  },
+  "homepage": "https://github.com/StreamSimple/tscollections#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2"
+  }
+}
