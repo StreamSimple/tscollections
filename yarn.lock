@@ -52,6 +52,10 @@ check-error@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
 
+com.streamsimple.tsnumbers@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/com.streamsimple.tsnumbers/-/com.streamsimple.tsnumbers-1.0.0.tgz#aa065e34f6e4eaed33806916c1ff1211b88a6c6d"
+
 commander@2.15.1:
   version "2.15.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"

@@ -1,7 +1,5 @@
-export class Hash {
-
-}
+import {UInt} from 'com.streamsimple.tsnumbers/dist/uint';
 
 export interface Hashcode {
-  hashcode(): string
+  hashcode(): UInt
 }
