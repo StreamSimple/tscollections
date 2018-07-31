@@ -98,7 +98,7 @@ export class ArrayList<E extends EqualsAndHashcode<E>> implements List<E> {
   }
 
   public get(index: number): E {
-    if (index > this.dataSize) {
+    if (index >= this.dataSize) {
       throw new Error("Index ouf of bounds.");
     }
 
@@ -163,8 +163,18 @@ export class ArrayList<E extends EqualsAndHashcode<E>> implements List<E> {
     return changed;
   }
 
-  public removeAtIndex(e: number): E {
-    return undefined;
+  public removeAtIndex(index: number): E {
+    if (index >= this.dataSize) {
+      throw new Error("Index ouf of bounds.");
+    }
+
+    let item = this.data[index];
+
+    for (;index < this.dataSize - 1; index++) {
+      this.data[index] = this.data[index + 1];
+    }
+
+    return item;
   }
 
   public retainAll(c: Collection<E>): boolean {
