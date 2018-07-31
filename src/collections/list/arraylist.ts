@@ -14,15 +14,14 @@ export class ArrayList<E extends EqualsAndHashcode<E>> implements List<E> {
   }
 
   private amortize() {
-    let newData = new Array(this.dataSize * 2);
-    copy(this.data, 0, newData, 0, this.dataSize);
+    if (this.dataSize === this.data.length) {
+      let newData = new Array(this.dataSize * 2);
+      copy(this.data, 0, newData, 0, this.dataSize);
+    }
   }
 
   public add(e: E): boolean {
-    if (this.dataSize === this.data.length) {
-      this.amortize();
-    }
-
+    this.amortize();
     this.data[this.dataSize] = e;
     this.dataSize++;
     return true;
@@ -36,10 +35,23 @@ export class ArrayList<E extends EqualsAndHashcode<E>> implements List<E> {
       changed = changed || this.add(item);
     }
 
+    this.dataSize++;
     return changed;
   }
 
-  public addAtIndex(index: number, e: E) {
+  public addAtIndex(destIndex: number, e: E) {
+    if (destIndex >= this.dataSize) {
+      throw new Error("Index ouf of bounds.");
+    }
+
+    this.amortize();
+
+    for (let index = this.dataSize - 1; index >= destIndex; index--) {
+      this.data[index + 1] = this.data[index];
+    }
+
+    this.data[destIndex] = e;
+    this.dataSize++;
   }
 
   public clear() {
