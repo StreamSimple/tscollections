@@ -1,9 +1,10 @@
 import {List} from './list';
 import {Collection} from '../collection';
 import {UInt} from 'com.streamsimple.tsnumbers/dist/uint';
-import {Equals} from '../../obj/equals';
+import {EqualsAndHashcode} from '../../obj/equalsAndHashcode';
+import {copy} from '../../arrays/arrayutils';
 
-export class ArrayList<E extends Equals<E>> implements List<E> {
+export class ArrayList<E extends EqualsAndHashcode<E>> implements List<E> {
   public static readonly DEFAULT_SIZE = 16;
 
   private data: E[] = new Array(ArrayList.DEFAULT_SIZE);
@@ -12,15 +13,30 @@ export class ArrayList<E extends Equals<E>> implements List<E> {
   public constructor() {
   }
 
-  public add(e: E) {
+  private amortize() {
+    let newData = new Array(this.dataSize * 2);
+    copy(this.data, 0, newData, 0, this.dataSize);
   }
 
-  public addAll(otherCollection: Collection<E>) {
+  public add(e: E): boolean {
+    if (this.dataSize === this.data.length) {
+      this.amortize();
+    }
+
+    this.data[this.dataSize] = e;
+    this.dataSize++;
+    return true;
+  }
+
+  public addAll(otherCollection: Collection<E>): boolean {
     let arr = otherCollection.toArray();
+    let changed = false;
 
     for (let item of arr) {
-      this.add(item);
+      changed = changed || this.add(item);
     }
+
+    return changed;
   }
 
   public addAtIndex(index: number, e: E) {
@@ -70,15 +86,32 @@ export class ArrayList<E extends Equals<E>> implements List<E> {
   }
 
   public get(index: number): E {
-    return undefined;
+    if (index > this.dataSize) {
+      throw new Error("Index ouf of bounds.");
+    }
+
+    return this.data[index];
   }
 
   public hashcode(): UInt {
-    return undefined;
+    let hash = new UInt(0);
+    let prime = new UInt(31);
+
+    for (let index = 0; index < this.dataSize; index++) {
+      hash = hash.mult(prime).add(this.data[index].hashcode());
+    }
+
+    return hash;
   }
 
   public indexOf(e: E): number {
-    return 0;
+    for (let index = 0; index < this.dataSize; index++) {
+      if (e.equals(this.data[index])) {
+        return index;
+      }
+    }
+
+    return -1;
   }
 
   public isEmpty(): boolean {
@@ -86,7 +119,13 @@ export class ArrayList<E extends Equals<E>> implements List<E> {
   }
 
   public lastIndexOf(e: E): number {
-    return 0;
+    for (let index = this.dataSize - 1; index >= 0; index--) {
+      if (e.equals(this.data[index])) {
+        return index;
+      }
+    }
+
+    return -1;
   }
 
   public remove(e: E): boolean {
@@ -116,17 +155,28 @@ export class ArrayList<E extends Equals<E>> implements List<E> {
     return undefined;
   }
 
-  public retainAll(c: Collection<E>) {
+  public retainAll(c: Collection<E>): boolean {
+    let arr = c.toArray();
+    let changed = false;
+
+    for (let index = 0; index < this.dataSize; index++) {
+      if (!c.contains(this.data[index])) {
+        changed = true;
+        this.removeAtIndex(index);
+        index--;
+      }
+    }
+
+    return changed;
   }
 
   public size(): number {
     return this.dataSize;
   }
 
-  public subList(fromIndex: number, toIndex: number) {
-  }
-
   public toArray(): E[] {
-    return undefined;
+    let arr = new Array(this.dataSize);
+    copy(this.data, 0, arr, 0, this.dataSize);
+    return arr;
   }
 }

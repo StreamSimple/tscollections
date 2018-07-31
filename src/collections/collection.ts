@@ -5,12 +5,12 @@ export interface Collection<E extends Equals<E>> extends EqualsAndHashcode<Colle
   add(e: E);
   addAll(c: Collection<E>)
   clear();
-  contains(e: E);
-  containsAll(c: Collection<E>);
+  contains(e: E): boolean;
+  containsAll(c: Collection<E>): boolean;
   isEmpty(): boolean;
   remove(e: E): boolean;
-  removeAll(c: Collection<E>);
-  retainAll(c: Collection<E>);
+  removeAll(c: Collection<E>): boolean;
+  retainAll(c: Collection<E>): boolean;
   size(): number;
   toArray(): E[];
 }

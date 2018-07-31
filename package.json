@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/StreamSimple/tscollections#readme",
   "dependencies": {
-    "com.streamsimple.tsnumbers": "1.1.0"
+    "com.streamsimple.tsnumbers": "1.2.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.4",

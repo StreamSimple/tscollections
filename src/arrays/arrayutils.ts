@@ -13,3 +13,10 @@ export function equals<T extends Equals<T>>(thisArr: T[], thatArr: T[]) {
 
   return true;
 }
+
+export function copy<T>(src: T[], srcIndex: number, dest: T[], destIndex: number, length: number) {
+  for (let index = 0; index < length; index++) {
+    let srcVal = src[srcIndex + index];
+    dest[destIndex + index] = srcVal;
+  }
+}

@@ -1,11 +1,10 @@
 import {Collection} from '../collection';
-import {Equals} from '../../obj/equals';
+import {EqualsAndHashcode} from '../../obj/equalsAndHashcode';
 
-export interface List<E extends Equals<E>> extends Collection<E> {
+export interface List<E extends EqualsAndHashcode<E>> extends Collection<E> {
   addAtIndex(index: number, e: E);
   get(index: number): E;
   indexOf(e: E): number;
   lastIndexOf(e: E): number;
   removeAtIndex(e: number): E;
-  subList(fromIndex: number, toIndex: number);
 }
