@@ -1,6 +1,7 @@
 import {EqualsAndHashcode} from '../obj/equalsAndHashcode';
+import {Equals} from '../obj/equals';
 
-export interface Collection<E> extends EqualsAndHashcode<E> {
+export interface Collection<E extends Equals<E>> extends EqualsAndHashcode<Collection<E>> {
   add(e: E);
   addAll(c: Collection<E>)
   clear();
