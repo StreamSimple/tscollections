@@ -50,51 +50,78 @@ export class LinkedList<E extends EqualsAndHashcode<E>> implements List<E> {
   }
 
   public equals(that: Collection<E>): boolean {
-    // TODO
-    return false;
+    throw new Error('Unsupported.');
   }
 
   public get(index: number): E {
-    return undefined;
+    if (index >= this.size()) {
+      throw new Error('Index out of bounds.');
+    }
+
+    let currentNode = this.innerList.firstNode;
+
+    for (let tempIndex = 0; tempIndex < index; tempIndex++) {
+      currentNode = currentNode.next;
+    }
+
+    return currentNode.element;
   }
 
   public hashcode(): UInt {
-    return undefined;
+    throw new Error('Unsupported.');
   }
 
   public indexOf(e: E): number {
-    return 0;
+    return this.innerList.indexOf(e, equalsFunction);
   }
 
   public isEmpty(): boolean {
-    return false;
+    return this.innerList.isEmpty();
   }
 
   public lastIndexOf(e: E): number {
-    return 0;
+    let lastIndex = -1;
+    let currentNode = this.innerList.firstNode;
+
+    for (let index = 0; index < this.size(); index++) {
+      if (currentNode.element.equals(e)) {
+        lastIndex = index;
+      }
+
+      currentNode = currentNode.next;
+    }
+
+    return lastIndex;
   }
 
   public remove(e: E): boolean {
-    return false;
+    return this.innerList.remove(e, equalsFunction);
   }
 
   public removeAll(c: Collection<E>): boolean {
-    return false;
+    let changed = false;
+    let arr = c.toArray();
+
+    for (let item of arr) {
+      changed = changed || this.remove(item);
+    }
+
+    return changed;
   }
 
   public removeAtIndex(e: number): E {
-    return undefined;
+    return this.innerList.removeElementAtIndex(e);
   }
 
   public retainAll(c: Collection<E>): boolean {
-    return false;
+    throw new Error('Unsupported.');
   }
 
   public size(): number {
-    return 0;
+    return this.innerList.size();
   }
 
   public toArray(): E[] {
-    return undefined;
+    return this.innerList.toArray();
   }
 }
