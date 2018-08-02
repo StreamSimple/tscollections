@@ -1,12 +1,12 @@
-import {Equals} from '../obj/equals';
+import {Collectable} from 'typescriptcollectionsframework';
 
-export function equals<T extends Equals<T>>(thisArr: T[], thatArr: T[]) {
+export function equals<T>(thisArr: T[], thatArr: T[], equalsImpl: Collectable<T>) {
   if (thisArr.length !== thatArr.length) {
     return false;
   }
 
   for (let index = 0; index < thisArr.length; index++) {
-    if (!thisArr[index].equals(thatArr[index])) {
+    if (!equalsImpl.equals(thisArr[index], thatArr[index])) {
       return false;
     }
   }
