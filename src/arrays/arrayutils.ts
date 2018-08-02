@@ -1,7 +1,9 @@
 import {Collectable} from 'typescriptcollectionsframework';
 
 export class ArrayUtils {
-  public static equals<T>(thisArr: T[], thatArr: T[], equalsImpl: Collectable<T>) {
+  public static equals<T>(thisArr: T[],
+                          thatArr: T[],
+                          equalsImpl: Collectable<T>): boolean {
     if (thisArr.length !== thatArr.length) {
       return false;
     }

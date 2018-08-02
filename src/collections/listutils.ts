@@ -1,7 +1,9 @@
 import {Collectable, List} from 'typescriptcollectionsframework';
 
 export class ListUtils {
-  public static equals<T extends Collectable<T>>(thisList: List<T>, thatList: List<T>, equalsImpl: Collectable<T>) {
+  public static equals<T extends Collectable<T>>(thisList: List<T>,
+                                                 thatList: List<T>,
+                                                 equalsImpl: Collectable<T>): boolean {
     if (thisList.size() !== thatList.size()) {
       return false;
     }

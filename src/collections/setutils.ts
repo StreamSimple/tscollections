@@ -7,7 +7,7 @@ export class SetUtils {
    * @param {JSet<T>} thatSet
    * @returns {boolean}
    */
-  public static equals<T>(thisSet: JSet<T>, thatSet: JSet<T>) {
+  public static equals<T>(thisSet: JSet<T>, thatSet: JSet<T>): boolean {
     if (thisSet.size() !== thatSet.size()) {
       return false;
     }
