@@ -1,4 +1,4 @@
-import {Collectable, JSet} from 'typescriptcollectionsframework';
+import {ImmutableSet, JSet} from 'typescriptcollectionsframework';
 
 export class SetUtils {
   /**
@@ -7,7 +7,7 @@ export class SetUtils {
    * @param {JSet<T>} thatSet
    * @returns {boolean}
    */
-  public static equals<T>(thisSet: JSet<T>, thatSet: JSet<T>): boolean {
+  public static equals<T>(thisSet: ImmutableSet<T>, thatSet: ImmutableSet<T>): boolean {
     if (thisSet.size() !== thatSet.size()) {
       return false;
     }

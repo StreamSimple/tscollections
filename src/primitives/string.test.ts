@@ -2,6 +2,7 @@ import * as chai from "chai";
 import {StringHashableImpl} from './string';
 
 const expect = chai.expect;
+
 describe('StringHashableImpl', () => {
   describe('hashcode tests', () => {
     it('should return 0 for a string of length 0', () => {

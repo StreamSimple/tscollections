@@ -1,4 +1,4 @@
-import {Collectable, JMap} from 'typescriptcollectionsframework';
+import {Collectable, ImmutableMap, JMap} from 'typescriptcollectionsframework';
 
 export class MapUtils {
   /**
@@ -8,8 +8,8 @@ export class MapUtils {
    * @param {Collectable<V>} valueEqualsImpl
    * @returns {boolean}
    */
-  public static equals<K, V>(thisMap: JMap<K, V>,
-                             thatMap: JMap<K, V>,
+  public static equals<K, V>(thisMap: ImmutableMap<K, V>,
+                             thatMap: ImmutableMap<K, V>,
                              valueEqualsImpl: Collectable<V>): boolean {
     if (thisMap.size() !== thatMap.size()) {
       return false;
