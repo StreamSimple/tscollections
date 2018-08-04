@@ -40,7 +40,7 @@ describe('SetUtils', () => {
 
       expect(SetUtils.equals(setA, setB)).to.be.true;
     });
-    
+
     it('should say non-equal sets of equal size are not', () => {
       let setA = new HashSet<string>(StringHashableImpl.INSTANCE);
       setA.add('a');
