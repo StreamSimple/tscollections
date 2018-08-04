@@ -2,6 +2,11 @@ import {UInt} from 'com.streamsimple.tsnumbers/dist/uint';
 import {Hashable} from 'typescriptcollectionsframework';
 
 export class StringHashableImpl implements Hashable<string> {
+  public static readonly INSTANCE = new StringHashableImpl();
+
+  private constructor() {
+  }
+
   equals(thisString: string, thatString: string): boolean {
     return thisString === thatString;
   }
