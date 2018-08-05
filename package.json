@@ -21,16 +21,20 @@
   },
   "homepage": "https://github.com/StreamSimple/tscollections#readme",
   "dependencies": {
-    "typescriptcollectionsframework": "^4.2.2"
+    "com.streamsimple.tsnumbers": "^1.2.0",
+    "typescriptcollectionsframework": "^4.2.2",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.5.6"
   },
   "devDependencies": {
-    "@types/es6-shim": "^0.31.36",
-    "es6-shim": "^0.35.3",
     "@types/chai": "^4.1.4",
+    "@types/es6-shim": "^0.31.37",
     "@types/mocha": "^5.2.5",
+    "@types/node": "10.3.6",
     "chai": "^4.1.2",
+    "es6-shim": "^0.35.3",
     "mocha": "^5.2.0",
-    "ts-node": "^7.0.0",
-    "typescript": "^2.9.2"
+    "ts-node": "~4.1.0",
+    "typescript": "~2.5.3"
   }
 }
