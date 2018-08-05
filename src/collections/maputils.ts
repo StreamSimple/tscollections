@@ -1,4 +1,5 @@
-import {Collectable, ImmutableMap, JMap} from 'typescriptcollectionsframework';
+import {Collectable, HashMap, ImmutableMap, JMap} from 'typescriptcollectionsframework';
+import {MapDiff, ValueDiff} from './mapdiff';
 
 export class MapUtils {
   /**
@@ -26,5 +27,49 @@ export class MapUtils {
     }
 
     return true;
+  }
+
+  public static diff<K, V>(oldMap: ImmutableMap<K, V>,
+                           newMap: ImmutableMap<K, V>,
+                           equalsImpl: Collectable<V>): MapDiff<K, V> {
+    let added = new HashMap<K, V>();
+    let removed = new HashMap<K, V>();
+    let changed = new HashMap<K, ValueDiff<V>>();
+
+    let oldEntrySet = oldMap.entrySet();
+    let newKeys = newMap.keySet();
+
+    let oldEntryIterator = oldEntrySet.iterator();
+    let newKeyIterator = newKeys.iterator();
+
+    while (oldEntryIterator.hasNext()) {
+      let oldEntry = oldEntryIterator.next();
+      let oldKey = oldEntry.getKey();
+      let oldValue = oldEntry.getValue();
+
+      if (newKeys.contains(oldKey)) {
+        // The old and new map have the same key
+        let newValue = newMap.get(oldKey);
+
+        if (!equalsImpl.equals(oldValue, newValue)) {
+          // The values are different so this is a change
+          changed.put(oldKey, new ValueDiff<V>(oldValue, newValue));
+        }
+      } else {
+        // The old map has a key that the new map doesn't. So this was a removal.
+        removed.put(oldKey, oldValue);
+      }
+    }
+
+    // Get the new keys
+    while (newKeyIterator.hasNext()) {
+      let newKey = newKeyIterator.next();
+
+      if (!oldMap.containsKey(newKey)) {
+        added.put(newKey, newMap.get(newKey));
+      }
+    }
+
+    return new MapDiff(added, removed, changed);
   }
 }
