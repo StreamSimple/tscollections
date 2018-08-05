@@ -1,7 +1,6 @@
 import * as chai from "chai";
 import {StringHashableImpl} from '../primitives/string';
-import {HashMap, HashSet} from 'typescriptcollectionsframework';
-import {SetUtils} from './setutils';
+import {HashMap} from 'typescriptcollectionsframework';
 import {MapUtils} from './maputils';
 
 const expect = chai.expect;
