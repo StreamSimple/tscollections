@@ -12,7 +12,7 @@ export function isString(x: any): x is string {
 
 export class PrimitiveHashable implements Hashable<string | number> {
   public static readonly INSTANCE = new PrimitiveHashable();
-  
+
   private constructor() {
   }
 

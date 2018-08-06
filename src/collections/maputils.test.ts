@@ -84,12 +84,55 @@ describe('MapUtils', () => {
       let expectedAdded = new HashMap<string, string>();
       expectedAdded.put('d', 'd1');
 
-      let expected = new MapDiff<string, string>(new HashMap(), expectedAdded, new HashMap());
+      let expected = new MapDiff<string, string>(expectedAdded, new HashMap(), new HashMap());
       let actual = MapUtils.diff(oldMap, newMap, StringHashableImpl.INSTANCE);
 
       let mapDiffCollectable = new MapDiffCollectable(StringHashableImpl.INSTANCE);
 
-      expect(mapDiffCollectable.equals(expected, actual))
+      expect(mapDiffCollectable.equals(expected, actual)).to.be.true;
+    });
+
+    it('should detect removed key value pairs', () => {
+      let oldMap = new HashMap<string, string>(StringHashableImpl.INSTANCE);
+      oldMap.put('a', 'a1');
+      oldMap.put('b', 'b1');
+      oldMap.put('c', 'c1');
+
+      let newMap = new HashMap<string, string>(StringHashableImpl.INSTANCE);
+      newMap.put('a', 'a1');
+      newMap.put('b', 'b1');
+
+      let expectedRemoved = new HashMap<string, string>();
+      expectedRemoved.put('c', 'c1');
+
+      let expected = new MapDiff<string, string>(new HashMap(), expectedRemoved, new HashMap());
+      let actual = MapUtils.diff(oldMap, newMap, StringHashableImpl.INSTANCE);
+
+      let mapDiffCollectable = new MapDiffCollectable(StringHashableImpl.INSTANCE);
+
+      expect(mapDiffCollectable.equals(expected, actual)).to.true;
+    });
+
+    it('should detect changed key value pairs', () => {
+      let oldMap = new HashMap<string, string>(StringHashableImpl.INSTANCE);
+      oldMap.put('a', 'a1');
+      oldMap.put('b', 'b1');
+      oldMap.put('c', 'c1');
+
+      let newMap = new HashMap<string, string>(StringHashableImpl.INSTANCE);
+      newMap.put('a', 'a1');
+      newMap.put('b', 'b1');
+      newMap.put('c', 'c2');
+
+      let expectedChanged = new HashMap<string, ValueDiff<string>>();
+      expectedChanged.put('c', new ValueDiff('c1', 'c2'));
+
+      let expected = new MapDiff<string, string>(new HashMap(), new HashMap(), expectedChanged);
+      let actual = MapUtils.diff(oldMap, newMap, StringHashableImpl.INSTANCE);
+
+      let mapDiffCollectable = new MapDiffCollectable(StringHashableImpl.INSTANCE);
+
+      expect(mapDiffCollectable.equals(expected, actual)).to.true;
     });
   });
 });
