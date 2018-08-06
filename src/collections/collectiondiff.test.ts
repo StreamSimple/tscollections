@@ -20,7 +20,7 @@ describe('CollectionDiff', () => {
       let diff = new CollectionDiff(added, removed);
       expect(diff.isSame()).to.be.false;
     });
-    
+
     it('should not be the same if there are removed elements', () => {
       let added = new ArrayList();
       let removed = new ArrayList();
