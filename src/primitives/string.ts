@@ -11,7 +11,7 @@ export class StringHashableImpl implements Hashable<string> {
     return thisString === thatString;
   }
 
-  hashCode(val: String): number {
+  hashCode(val: string): number {
     let hashcodeVal = new UInt(0);
 
     for (let index = 0; index < val.length; index++) {
