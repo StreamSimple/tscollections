@@ -1,6 +1,10 @@
 import {Hashable} from 'typescriptcollectionsframework';
 import {NumberHashableImpl} from './number';
 import {StringHashableImpl} from './string';
+import {PUInt} from './puint';
+import {PULong} from './pulong';
+import {PString} from './pstring';
+import {PDouble} from './pdouble';
 
 export enum PrimitiveType {
   UINT,
@@ -11,6 +15,21 @@ export enum PrimitiveType {
 
 export interface Primitive {
   getType(): PrimitiveType;
+}
+
+export function parsePrimitive(valString: string, primitiveType: PrimitiveType) {
+  switch (primitiveType) {
+    case PrimitiveType.UINT:
+      return PUInt.parseInt(valString);
+    case PrimitiveType.ULONG:
+      return PULong.parseLong(valString);
+    case PrimitiveType.DOUBLE:
+      return PDouble.parseDouble(valString);
+    case PrimitiveType.STRING:
+      return new PString(valString);
+    default:
+      throw new Error();
+  }
 }
 
 export function isNumber(x: any): x is number {
