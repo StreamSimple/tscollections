@@ -1,7 +1,6 @@
 import * as chai from "chai";
 import {StringHashableImpl} from '../primitives/string';
-import {ArrayList, HashMap} from 'typescriptcollectionsframework';
-import {MapUtils} from './maputils';
+import {ArrayList} from 'typescriptcollectionsframework';
 import {ListUtils} from './listutils';
 
 const expect = chai.expect;
@@ -15,7 +14,7 @@ describe('ListUtils', () => {
       expect(ListUtils.equals(listA, listB, StringHashableImpl.INSTANCE)).to.be.true;
     });
 
-    it('should say maps of different sizes are not equal', () => {
+    it('should say lists of different sizes are not equal', () => {
       let listA = new ArrayList<string>(StringHashableImpl.INSTANCE);
       listA.add('a');
       listA.add('b');
@@ -30,7 +29,7 @@ describe('ListUtils', () => {
       expect(ListUtils.equals(listA, listB, StringHashableImpl.INSTANCE)).to.be.false;
     });
 
-    it('should say equal maps are equal', () => {
+    it('should say equal lists are equal', () => {
       let listA = new ArrayList<string>(StringHashableImpl.INSTANCE);
       listA.add('a');
       listA.add('b');
@@ -44,7 +43,7 @@ describe('ListUtils', () => {
       expect(ListUtils.equals(listA, listB, StringHashableImpl.INSTANCE)).to.be.true;
     });
 
-    it('should say non-equal sets of equal size are not', () => {
+    it('should say non-equal lists of equal size are not', () => {
       let listA = new ArrayList<string>(StringHashableImpl.INSTANCE);
       listA.add('a');
       listA.add('b');

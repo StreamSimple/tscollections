@@ -44,7 +44,7 @@ describe('MapUtils', () => {
       expect(MapUtils.equals(mapA, mapB, StringHashableImpl.INSTANCE)).to.be.true;
     });
 
-    it('should say non-equal sets of equal size are not', () => {
+    it('should say non-equal maps of equal size are not', () => {
       let mapA = new HashMap<string, string>(StringHashableImpl.INSTANCE);
       mapA.put('a', 'a1');
       mapA.put('b', 'b1');
