@@ -2,6 +2,17 @@ import {Hashable} from 'typescriptcollectionsframework';
 import {NumberHashableImpl} from './number';
 import {StringHashableImpl} from './string';
 
+export enum PrimitiveType {
+  UINT,
+  ULONG,
+  DOUBLE,
+  STRING
+}
+
+export interface Primitive {
+  getType(): PrimitiveType;
+}
+
 export function isNumber(x: any): x is number {
   return typeof x === "number";
 }
