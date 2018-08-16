@@ -16,6 +16,11 @@ export class PUInt implements Primitive {
 }
 
 export class PUintHashable implements Hashable<PUInt> {
+  public static readonly INSTANCE = new PUintHashable();
+
+  private constructor() {
+  }
+
   equals(thisVal: PUInt, thatVal: PUInt): boolean {
     return thisVal.val.toNumber() == thatVal.val.toNumber();
   }

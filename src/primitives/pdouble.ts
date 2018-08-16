@@ -16,6 +16,11 @@ export class PDouble implements Primitive {
 }
 
 export class PDoubleHashable implements Hashable<PDouble> {
+  public static readonly INSTANCE = new PDoubleHashable();
+
+  private constructor() {
+  }
+
   equals(thisVal: PDouble, thatVal: PDouble): boolean {
     return thisVal.val === thatVal.val;
   }

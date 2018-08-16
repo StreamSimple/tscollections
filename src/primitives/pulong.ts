@@ -17,6 +17,11 @@ export class PULong implements Primitive {
 }
 
 export class PULongHashable implements Hashable<PULong> {
+  public static readonly INSTANCE = new PULongHashable();
+
+  private constructor() {
+  }
+
   equals(thisVal: PULong, thatVal: PULong): boolean {
     return false;
   }

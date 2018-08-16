@@ -1,10 +1,9 @@
 import {Hashable} from 'typescriptcollectionsframework';
-import {NumberHashableImpl} from './number';
 import {StringHashableImpl} from './string';
-import {PUInt} from './puint';
-import {PULong} from './pulong';
+import {PUInt, PUintHashable} from './puint';
+import {PULong, PULongHashable} from './pulong';
 import {PString} from './pstring';
-import {PDouble} from './pdouble';
+import {PDouble, PDoubleHashable} from './pdouble';
 
 export enum PrimitiveType {
   UINT,
@@ -40,23 +39,43 @@ export function isString(x: any): x is string {
   return typeof x === "string";
 }
 
-export class PrimitiveHashable implements Hashable<string | number> {
+export class PrimitiveHashable implements Hashable<Primitive> {
   public static readonly INSTANCE = new PrimitiveHashable();
 
   private constructor() {
   }
 
-  public equals(thisVal: string | number, thatVal: string | number): boolean {
-    return thisVal === thatVal;
+  public equals(thisVal: Primitive, thatVal: Primitive): boolean {
+    if (thisVal.getType() !== thatVal.getType()) {
+      return false;
+    }
+
+    switch (thisVal.getType()) {
+      case PrimitiveType.UINT:
+        return PUintHashable.INSTANCE.equals(thisVal as PUInt, thatVal as PUInt);
+      case PrimitiveType.ULONG:
+        return PULongHashable.INSTANCE.equals(thisVal as PULong, thatVal as PULong);
+      case PrimitiveType.DOUBLE:
+        return PDoubleHashable.INSTANCE.equals(thisVal as PDouble, thatVal as PDouble);
+      case PrimitiveType.STRING:
+        return StringHashableImpl.INSTANCE.equals((thisVal as PString).val, (thatVal as PString).val);
+      default:
+        throw new Error();
+    }
   }
 
-  public hashCode(val: string | number): number {
-    if (isNumber(val)) {
-      return NumberHashableImpl.INSTANCE.hashCode(val);
-    } else if (isString(val)) {
-      return StringHashableImpl.INSTANCE.hashCode(val);
-    } else {
-      throw new Error();
+  public hashCode(val: Primitive): number {
+    switch (val.getType()) {
+      case PrimitiveType.UINT:
+        return PUintHashable.INSTANCE.hashCode(val as PUInt);
+      case PrimitiveType.ULONG:
+        return PULongHashable.INSTANCE.hashCode(val as PULong);
+      case PrimitiveType.DOUBLE:
+        return PDoubleHashable.INSTANCE.hashCode(val as PDouble);
+      case PrimitiveType.STRING:
+        return StringHashableImpl.INSTANCE.hashCode((val as PString).val);
+      default:
+        throw new Error();
     }
   }
 }
