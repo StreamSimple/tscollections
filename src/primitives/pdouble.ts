@@ -1,6 +1,6 @@
 import {Primitive, PrimitiveType} from './primitive';
 import {Hashable} from 'typescriptcollectionsframework';
-import {StringHashableImpl} from '../../dist/primitives/string';
+import {StringHashableImpl} from './string';
 
 export class PDouble implements Primitive {
   constructor(public readonly val: number) {
