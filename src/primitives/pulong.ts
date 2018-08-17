@@ -23,7 +23,8 @@ export class PULongHashable implements Hashable<PULong> {
   }
 
   equals(thisVal: PULong, thatVal: PULong): boolean {
-    return false;
+    return thisVal.val.getMs32b().toNumber() === thatVal.val.getMs32b().toNumber() &&
+        thisVal.val.getLs32b().toNumber() === thatVal.val.getLs32b().toNumber();
   }
 
   hashCode(val: PULong): number {
