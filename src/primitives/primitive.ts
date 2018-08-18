@@ -16,7 +16,7 @@ export interface Primitive {
   getType(): PrimitiveType;
 }
 
-export function parsePrimitive(valString: string, primitiveType: PrimitiveType) {
+export function parsePrimitive(valString: string, primitiveType: PrimitiveType): Primitive {
   switch (primitiveType) {
     case PrimitiveType.UINT:
       return PUInt.parseInt(valString);
