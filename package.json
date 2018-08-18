@@ -1,6 +1,6 @@
 {
   "name": "com.streamsimple.tscollections",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A collections library for typescript with support for equals and hashcode.",
   "main": "index.ts",
   "scripts": {
