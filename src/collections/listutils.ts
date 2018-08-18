@@ -1,6 +1,6 @@
 import {
   ArrayList,
-  Collectable,
+  Collectable, ImmutableCollection,
   ImmutableList,
   LinkedList,
   List
@@ -68,15 +68,35 @@ export class ListUtils {
     return list;
   }
 
+  public static createArrayListFromCollection<T>(collection: ImmutableCollection<T>): ArrayList<T> {
+    let list = new ArrayList<T>();
+    ListUtils.addAllFromCollection(list, collection);
+    return list;
+  }
+
   public static ceateLinkedListFrom<T>(arr: T[]): LinkedList<T> {
     let list = new LinkedList<T>();
     ListUtils.addAll(list, arr);
     return list;
   }
 
+  public static createLinkedListFromCollection<T>(collection: ImmutableCollection<T>): LinkedList<T> {
+    let list = new LinkedList<T>();
+    ListUtils.addAllFromCollection(list, collection);
+    return list;
+  }
+
   public static addAll<T>(dest: List<T>, arr: T[]) {
     for (let item of arr) {
       dest.add(item);
+    }
+  }
+
+  public static addAllFromCollection<T>(dest: List<T>, collection: ImmutableCollection<T>) {
+    let iterator = collection.iterator();
+
+    while (iterator.hasNext()) {
+      dest.add(iterator.next());
     }
   }
 }
