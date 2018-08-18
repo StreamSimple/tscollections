@@ -1,4 +1,11 @@
-import {ArrayList, Collectable, ImmutableList, LinkedList, List} from 'typescriptcollectionsframework';
+import {
+  ArrayList,
+  Collectable,
+  ImmutableList,
+  LinkedList,
+  List
+} from 'typescriptcollectionsframework';
+import {CollectionDiff} from './collectiondiff';
 
 export class ListUtils {
   public static equals<T>(thisList: ImmutableList<T>,
@@ -21,6 +28,38 @@ export class ListUtils {
     }
 
     return true;
+  }
+
+  /**
+   * Note that this method assumes both the lists have the same collectable implementation.
+   * @param {ImmutableList<T>} firstList
+   * @param {ImmutableList<T>} secondList
+   */
+  public static diff<T>(firstList: ImmutableList<T>,
+                        secondList: ImmutableList<T>): CollectionDiff<T> {
+    let addedList = new ArrayList<T>();
+    let removedList = new ArrayList<T>();
+
+    let firstIterator = firstList.iterator();
+    let secondIterator = secondList.iterator();
+
+    while (firstIterator.hasNext()) {
+      let element = firstIterator.next();
+
+      if (!secondList.contains(element)) {
+        removedList.add(element);
+      }
+    }
+
+    while (secondIterator.hasNext()) {
+      let element = secondIterator.next();
+
+      if (!firstList.contains(element)) {
+        addedList.add(element);
+      }
+    }
+
+    return new CollectionDiff<T>(addedList, removedList);
   }
 
   public static createArrayListFrom<T>(arr: T[]): ArrayList<T> {
