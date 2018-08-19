@@ -99,4 +99,14 @@ export class ListUtils {
       dest.add(iterator.next());
     }
   }
+
+  public static toArray<T>(list: ImmutableList<T>) {
+    let arr = new Array<T>(list.size());
+
+    for (let index = 0; index < list.size(); index++) {
+      arr[index] = list.get(index);
+    }
+
+    return arr;
+  }
 }
