@@ -1,8 +1,8 @@
-import {Primitive, PrimitiveType} from './primitive';
+import {PrimitiveNumber, PrimitiveType} from './primitive';
 import {Hashable} from 'typescriptcollectionsframework';
 import {StringHashableImpl} from './string';
 
-export class PDouble implements Primitive {
+export class PDouble implements PrimitiveNumber {
   constructor(public readonly val: number) {
   }
 
@@ -12,6 +12,10 @@ export class PDouble implements Primitive {
 
   public static parseDouble(valString: string): PDouble {
     return new PDouble(Number.parseFloat(valString));
+  }
+
+  public toNumber(): number {
+    return this.val;
   }
 }
 

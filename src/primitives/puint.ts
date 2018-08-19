@@ -1,8 +1,8 @@
 import {UInt} from 'com.streamsimple.tsnumbers/dist/uint';
-import {Primitive, PrimitiveType} from './primitive';
+import {PrimitiveNumber, PrimitiveType} from './primitive';
 import {Hashable} from 'typescriptcollectionsframework';
 
-export class PUInt implements Primitive {
+export class PUInt implements PrimitiveNumber {
   constructor(public readonly val: UInt) {
   }
 
@@ -12,6 +12,10 @@ export class PUInt implements Primitive {
 
   public static parseInt(valString: string): PUInt {
     return new PUInt(UInt.parseInt(valString));
+  }
+
+  public toNumber(): number {
+    return this.val.toNumber();
   }
 }
 

@@ -16,6 +16,10 @@ export interface Primitive {
   getType(): PrimitiveType;
 }
 
+export interface PrimitiveNumber extends Primitive{
+  toNumber(): number;
+}
+
 export function parsePrimitive(valString: string, primitiveType: PrimitiveType): Primitive {
   switch (primitiveType) {
     case PrimitiveType.UINT:

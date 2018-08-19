@@ -1,9 +1,9 @@
 import {ULong} from 'com.streamsimple.tsnumbers/dist/ulong';
-import {Primitive, PrimitiveType} from './primitive';
+import {PrimitiveNumber, PrimitiveType} from './primitive';
 import {Hashable} from 'typescriptcollectionsframework';
 import {UInt} from 'com.streamsimple.tsnumbers/dist/uint';
 
-export class PULong implements Primitive {
+export class PULong implements PrimitiveNumber {
   constructor(public readonly val: ULong) {
   }
 
@@ -13,6 +13,10 @@ export class PULong implements Primitive {
 
   public static parseLong(valString: string): PULong {
     return new PULong(ULong.parseLong(valString));
+  }
+
+  public toNumber(): number {
+    return this.val.toBigInt().toJSNumber();
   }
 }
 
