@@ -11,4 +11,8 @@ export class PString implements Primitive {
   public isNumber(): boolean {
     return false;
   }
+
+  public toString(): string {
+    return this.val;
+  }
 }

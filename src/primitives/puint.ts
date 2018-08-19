@@ -21,6 +21,10 @@ export class PUInt implements PrimitiveNumber {
   public isNumber(): boolean {
     return true;
   }
+
+  public toString(): string {
+    return this.val.toNumber().toString();
+  }
 }
 
 export class PUintHashable implements Hashable<PUInt> {

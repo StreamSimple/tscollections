@@ -22,6 +22,10 @@ export class PULong implements PrimitiveNumber {
   public isNumber(): boolean {
     return true;
   }
+
+  public toString(): string {
+    return this.val.toBigInt().toString();
+  }
 }
 
 export class PULongHashable implements Hashable<PULong> {
