@@ -17,6 +17,10 @@ export class PDouble implements PrimitiveNumber {
   public toNumber(): number {
     return this.val;
   }
+
+  public isNumber(): boolean {
+    return true;
+  }
 }
 
 export class PDoubleHashable implements Hashable<PDouble> {

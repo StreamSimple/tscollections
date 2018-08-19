@@ -18,6 +18,10 @@ export class PULong implements PrimitiveNumber {
   public toNumber(): number {
     return this.val.toBigInt().toJSNumber();
   }
+
+  public isNumber(): boolean {
+    return true;
+  }
 }
 
 export class PULongHashable implements Hashable<PULong> {

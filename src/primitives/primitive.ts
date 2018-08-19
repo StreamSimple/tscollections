@@ -14,6 +14,7 @@ export enum PrimitiveType {
 
 export interface Primitive {
   getType(): PrimitiveType;
+  isNumber(): boolean;
 }
 
 export interface PrimitiveNumber extends Primitive{

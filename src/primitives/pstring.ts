@@ -7,4 +7,8 @@ export class PString implements Primitive {
   public getType(): PrimitiveType {
     return PrimitiveType.STRING;
   }
+
+  public isNumber(): boolean {
+    return false;
+  }
 }

@@ -17,6 +17,10 @@ export class PUInt implements PrimitiveNumber {
   public toNumber(): number {
     return this.val.toNumber();
   }
+
+  public isNumber(): boolean {
+    return true;
+  }
 }
 
 export class PUintHashable implements Hashable<PUInt> {
