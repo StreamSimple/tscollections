@@ -1,5 +1,6 @@
 import {UInt} from 'com.streamsimple.tsnumbers/dist/uint';
 import {Hashable} from 'typescriptcollectionsframework';
+import {HashableUtils} from '../utils/hashableutils';
 
 export class StringHashableImpl implements Hashable<string> {
   public static readonly INSTANCE = new StringHashableImpl();
@@ -7,11 +8,11 @@ export class StringHashableImpl implements Hashable<string> {
   private constructor() {
   }
 
-  equals(thisString: string, thatString: string): boolean {
+  public equals(thisString: string, thatString: string): boolean {
     return thisString === thatString;
   }
 
-  hashCode(val: string): number {
+  public hashCode(val: string): number {
     let hashcodeVal = new UInt(0);
 
     for (let index = 0; index < val.length; index++) {
@@ -19,5 +20,10 @@ export class StringHashableImpl implements Hashable<string> {
     }
 
     return hashcodeVal.toNumber();
+  }
+
+  public composeHashCodes(...vals: string[]): number {
+    let hashCodes = vals.map(val => StringHashableImpl.INSTANCE.hashCode(val));
+    return HashableUtils.composeHashCode(hashCodes);
   }
 }

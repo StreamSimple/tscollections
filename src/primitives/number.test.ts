@@ -2,7 +2,7 @@ import * as chai from "chai";
 import {NumberHashableImpl} from './number';
 const expect = chai.expect;
 
-describe('StringHashableImpl', () => {
+describe('NumberHashableImpl', () => {
   describe('hashcode tests', () => {
     it('should return a non zero hashcode', () => {
       let actual = NumberHashableImpl.INSTANCE.hashCode(111);
