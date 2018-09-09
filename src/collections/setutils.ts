@@ -1,4 +1,4 @@
-import {ImmutableSet, JSet} from 'typescriptcollectionsframework';
+import {ImmutableSet, JSet, LinkedHashSet} from 'typescriptcollectionsframework';
 
 export class SetUtils {
   /**
@@ -23,5 +23,18 @@ export class SetUtils {
     }
 
     return true;
+  }
+
+  public static linkedHashSetToArr<T>(set: LinkedHashSet<T>): T[] {
+    let arr: T[] = new Array(set.size());
+    let iterator = set.Iterator();
+    let index = 0;
+
+    while (iterator.hasNext()) {
+      arr[index] = iterator.next().getValue();
+      index++;
+    }
+
+    return arr;
   }
 }
