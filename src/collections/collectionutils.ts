@@ -1,5 +1,5 @@
 import {CollectionDiff} from './collectiondiff';
-import {ArrayList, ImmutableCollection, ImmutableList} from 'typescriptcollectionsframework';
+import {ArrayList, Collection, ImmutableCollection} from 'typescriptcollectionsframework';
 
 export class CollectionUtils {
   /**
@@ -32,5 +32,19 @@ export class CollectionUtils {
     }
 
     return new CollectionDiff<T>(addedList, removedList);
+  }
+
+  public static addAll<T>(dest: Collection<T>, arr: T[]) {
+    for (let item of arr) {
+      dest.add(item);
+    }
+  }
+
+  public static addAllFromCollection<T>(dest: Collection<T>, collection: ImmutableCollection<T>) {
+    let iterator = collection.iterator();
+
+    while (iterator.hasNext()) {
+      dest.add(iterator.next());
+    }
   }
 }
