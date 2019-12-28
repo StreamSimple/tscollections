@@ -1,5 +1,6 @@
-import {Collectable, HashMap, ImmutableMap, JMap} from 'typescriptcollectionsframework';
+import {Collectable, Hashable, HashMap, ImmutableMap, JIterator, JMap, MapEntry} from 'typescriptcollectionsframework';
 import {MapDiff, ValueDiff} from './mapdiff';
+import {StringHashableImpl} from "../primitives/string";
 
 export class MapUtils {
   /**
@@ -71,5 +72,17 @@ export class MapUtils {
     }
 
     return new MapDiff(added, removed, changed);
+  }
+
+  public static cloneHashMap<K, V>(mapVal: ImmutableMap<K, V>, hashable: Hashable<K>): HashMap<K, V> {
+    const newMap: HashMap<K, V> = new HashMap<K, V>(hashable);
+    const entryIterator: JIterator<MapEntry<K, V>> = mapVal.entrySet().iterator();
+
+    while (entryIterator.hasNext()) {
+      const entry: MapEntry<K, V> = entryIterator.next();
+      newMap.put(entry.getKey(), entry.getValue());
+    }
+
+    return newMap;
   }
 }

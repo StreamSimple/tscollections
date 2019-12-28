@@ -135,4 +135,24 @@ describe('MapUtils', () => {
       expect(mapDiffCollectable.equals(expected, actual)).to.true;
     });
   });
+
+  describe('clone hash map tests', () => {
+    it('clone an empty map properly', () => {
+      let expected = new HashMap<string, string>(StringHashableImpl.INSTANCE);
+      let actual = MapUtils.cloneHashMap(expected, StringHashableImpl.INSTANCE);
+
+      expect(MapUtils.equals(expected, actual, StringHashableImpl.INSTANCE)).to.be.true;
+    });
+
+    it('should clone a simple map properly', () => {
+      let expected = new HashMap<string, string>(StringHashableImpl.INSTANCE);
+      expected.put('a', 'a1');
+      expected.put('b', 'b1');
+      expected.put('c', 'c1');
+
+      let actual = MapUtils.cloneHashMap(expected, StringHashableImpl.INSTANCE);
+
+      expect(MapUtils.equals(expected, actual, StringHashableImpl.INSTANCE)).to.be.true;
+    });
+  })
 });
